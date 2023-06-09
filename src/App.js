@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+// import User from './components/User'; // useQueryを使用しない場合
+import User from './components/UserUseQuery'; // useQueryを使用する場合
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+/**
+* React Queryの使い方
+* 参考：https://reffect.co.jp/react/react-use-query
+*/
+
+const queryClient = new QueryClient();
 
 function App() {
+  const [show, setShow] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div style={{ margin: '2em' }}>
+        <div>
+          <button onClick={() => setShow(!show)}>Toggle</button>
+        </div>
+        <h1>ユーザ情報</h1>
+        {show && <User />}
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
