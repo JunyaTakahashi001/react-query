@@ -16,6 +16,7 @@ function User() {
     refetchOnWindowFocus: false, // ブラウザに戻った時再度fetchするかの設定
     cacheTime: 5000, // キャッシュ時間(ms)
     refetchInterval: 10000, // ポーリング設定(ms)
+    notifyOnChangeProps: ["data"], // dataプロパティのみ監視して再レンダリングを制御
   });
 
   // ロード中の処理
